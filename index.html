@@ -365,7 +365,7 @@
   <div class="hero-bg"></div>
   <div class="wrap hero-grid">
     <div>
-      <div class="eyebrow dark">Live gratuita · 23 de julho</div>
+      <div class="eyebrow dark">Live gratuita · 30 de julho</div>
       <h1 class="serif">Pare de ser mais um.<br>Descubra a habilidade que transforma um <span class="hl">enfermeiro comum</span> no especialista que toda clínica quer contratar.</h1>
       <p class="sub">Uma aula ao vivo gratuita para enfermeiros que querem sair do zero e se tornarem especialistas em vacinação na rede particular — sem depender de plantão, concurso ou sorte.</p>
       <div class="hero-ctas">
@@ -380,35 +380,36 @@
     </div>
 
     <div class="form-card" id="inscricao">
-      <span class="tag">Live · 23 de julho · 20h</span>
+      <span class="tag">Live · 30 de julho · 20h</span>
       <h3 class="serif">Garanta sua vaga na live</h3>
       <p class="desc">Preencha abaixo e receba os detalhes e o convite oficial da live.</p>
-      <form onsubmit="event.preventDefault(); this.querySelector('.form-submit').textContent='Vaga reservada ✓';">
+      <form id="form-inscricao">
         <div class="field">
           <label>Nome completo</label>
-          <input type="text" placeholder="Como devemos te chamar" required>
+          <input type="text" name="nome" placeholder="Como devemos te chamar" required>
         </div>
         <div class="field-row">
           <div class="field">
             <label>WhatsApp</label>
-            <input type="tel" placeholder="(00) 00000-0000" required>
+            <input type="tel" name="whatsapp" placeholder="(00) 00000-0000" required>
           </div>
           <div class="field">
             <label>E-mail</label>
-            <input type="email" placeholder="voce@email.com" required>
+            <input type="email" name="email" placeholder="voce@email.com" required>
           </div>
         </div>
         <div class="field">
           <label>Hoje você se considera</label>
         </div>
         <div class="radio-grid">
-          <label class="radio-opt"><input type="radio" name="perfil"> Recém-formado(a)</label>
-          <label class="radio-opt"><input type="radio" name="perfil"> Enfermeiro(a) atuante</label>
-          <label class="radio-opt"><input type="radio" name="perfil"> Quero migrar para vacinação</label>
-          <label class="radio-opt"><input type="radio" name="perfil"> Quero me especializar</label>
+          <label class="radio-opt"><input type="radio" name="perfil" value="Recém-formado(a)" required> Recém-formado(a)</label>
+          <label class="radio-opt"><input type="radio" name="perfil" value="Enfermeiro(a) atuante"> Enfermeiro(a) atuante</label>
+          <label class="radio-opt"><input type="radio" name="perfil" value="Quero migrar para vacinação"> Quero migrar para vacinação</label>
+          <label class="radio-opt"><input type="radio" name="perfil" value="Quero me especializar"> Quero me especializar</label>
         </div>
         <button type="submit" class="form-submit">Quero me tornar especialista</button>
-        <p class="form-foot">Vaga garantida para a live "O Mapa da Sala de Vacina Particular" — 23/07, 20h</p>
+        <p class="form-erro" style="display:none; color:#B3432F; font-size:13px; text-align:center; margin-top:10px;"></p>
+        <p class="form-foot">Vaga garantida para a live "O Mapa da Sala de Vacina Particular" — 30/07, 20h</p>
       </form>
     </div>
   </div>
@@ -550,12 +551,12 @@
         <div class="eyebrow dark">Sobre a live "O Mapa da Sala de Vacina Particular"</div>
         <h2 class="serif" style="font-size:clamp(24px,3vw,34px); font-weight:500; max-width:560px;">Uma aula ao vivo pensada para te entregar valor real, do início ao fim.</h2>
       </div>
-      <span class="badge-live">● 23 de julho · quinta · 20h · ao vivo</span>
+      <span class="badge-live">● 30 de julho · quinta · 20h · ao vivo</span>
     </div>
     <div class="browser-frame">
       <div class="browser-bar">
         <span class="dotbar"></span><span class="dotbar"></span><span class="dotbar"></span>
-        <span class="url">O MAPA DA SALA DE VACINA · LIVE GRATUITA · 23 DE JULHO</span>
+        <span class="url">O MAPA DA SALA DE VACINA · LIVE GRATUITA · 30 DE JULHO</span>
       </div>
       <div class="mod-grid">
         <div class="mod-card">
@@ -653,7 +654,7 @@
       </div>
       <div class="faq-item">
         <div class="faq-q" onclick="this.parentElement.classList.toggle('open')"><span>Como funciona o acesso à live?</span><span class="chev">⌄</span></div>
-        <div class="faq-a"><p>Após a inscrição, você recebe os detalhes e o link de acesso pelo WhatsApp, junto com lembretes antes do dia 23 de julho.</p></div>
+        <div class="faq-a"><p>Após a inscrição, você recebe os detalhes e o link de acesso pelo WhatsApp, junto com lembretes antes do dia 30 de julho.</p></div>
       </div>
       <div class="faq-item">
         <div class="faq-q" onclick="this.parentElement.classList.toggle('open')"><span>A live é gratuita?</span><span class="chev">⌄</span></div>
@@ -689,6 +690,41 @@
     <div>© 2026 · Todos os direitos reservados.</div>
   </div>
 </footer>
+
+<script>
+  document.getElementById('form-inscricao').addEventListener('submit', async function(e){
+    e.preventDefault();
+    var form = e.target;
+    var btn = form.querySelector('.form-submit');
+    var erro = form.querySelector('.form-erro');
+    erro.style.display = 'none';
+
+    var data = {
+      nome: form.nome.value.trim(),
+      whatsapp: form.whatsapp.value.trim(),
+      email: form.email.value.trim(),
+      perfil: form.perfil.value
+    };
+
+    btn.disabled = true;
+    btn.textContent = 'Enviando...';
+
+    try {
+      var res = await fetch('/api/inscricao', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      });
+      if (!res.ok) throw new Error('falha no envio');
+      window.location.href = '/obrigado';
+    } catch (err) {
+      btn.disabled = false;
+      btn.textContent = 'Quero me tornar especialista';
+      erro.textContent = 'Não conseguimos enviar sua inscrição. Tenta de novo em instantes.';
+      erro.style.display = 'block';
+    }
+  });
+</script>
 
 </body>
 </html>
