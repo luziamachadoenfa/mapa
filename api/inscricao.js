@@ -42,7 +42,7 @@ module.exports = async function handler(req, res) {
     if (!brevoRes.ok) {
       const errBody = await brevoRes.text();
       console.error('Brevo error:', brevoRes.status, errBody);
-      res.status(502).json({ error: 'falha ao registrar inscrição', debug_status: brevoRes.status, debug_body: errBody });
+      res.status(502).json({ error: 'falha ao registrar inscrição' });
       return;
     }
 
