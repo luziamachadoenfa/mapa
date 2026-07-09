@@ -16,6 +16,9 @@ module.exports = async function handler(req, res) {
     return;
   }
 
+  const whatsappDigits = whatsapp.replace(/\D/g, '');
+  const whatsappE164 = '+' + (whatsappDigits.startsWith('55') ? whatsappDigits : '55' + whatsappDigits);
+
   try {
     const brevoRes = await fetch('https://api.brevo.com/v3/contacts', {
       method: 'POST',
@@ -28,7 +31,7 @@ module.exports = async function handler(req, res) {
         email: email,
         attributes: {
           NOME: nome,
-          WHATSAPP: whatsapp,
+          WHATSAPP: whatsappE164,
           PERFIL: perfil
         },
         listIds: [Number(process.env.BREVO_LIST_ID)],
