@@ -143,6 +143,10 @@
     border:1px solid rgba(200,132,58,.3); padding:5px 12px; border-radius:20px;
     margin-bottom:16px;
   }
+  .countdown{display:flex; gap:8px; margin-bottom:20px;}
+  .countdown .cd-box{flex:1; background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.14); border-radius:9px; padding:10px 4px; text-align:center;}
+  .countdown .cd-num{font-family:'Fraunces',serif; font-size:22px; font-weight:600; color:var(--gold-light); line-height:1;}
+  .countdown .cd-lab{font-size:9px; letter-spacing:.08em; text-transform:uppercase; color:#94A698; margin-top:4px;}
   .form-card h3{font-family:'Fraunces',serif; font-size:24px; font-weight:500; margin-bottom:8px;}
   .form-card p.desc{font-size:13.5px; color:#B3C2B5; margin-bottom:22px;}
   .field{margin-bottom:14px;}
@@ -414,6 +418,12 @@ src="https://www.facebook.com/tr?id=1386697456681183&ev=PageView&noscript=1"
 
     <div class="form-card" id="inscricao">
       <span class="tag">Live · 30 de julho · 20h</span>
+      <div class="countdown" id="countdown">
+        <div class="cd-box"><div class="cd-num" id="cd-d">00</div><div class="cd-lab">dias</div></div>
+        <div class="cd-box"><div class="cd-num" id="cd-h">00</div><div class="cd-lab">horas</div></div>
+        <div class="cd-box"><div class="cd-num" id="cd-m">00</div><div class="cd-lab">min</div></div>
+        <div class="cd-box"><div class="cd-num" id="cd-s">00</div><div class="cd-lab">seg</div></div>
+      </div>
       <h3 class="serif">Garanta sua vaga na live</h3>
       <p class="desc">Preencha abaixo e receba os detalhes e o convite oficial da live.</p>
       <form id="form-inscricao">
@@ -756,6 +766,24 @@ src="https://www.facebook.com/tr?id=1386697456681183&ev=PageView&noscript=1"
       erro.style.display = 'block';
     }
   });
+
+  (function(){
+    var alvo = new Date('2026-07-30T20:00:00-03:00').getTime();
+    var d = document.getElementById('cd-d');
+    var h = document.getElementById('cd-h');
+    var m = document.getElementById('cd-m');
+    var s = document.getElementById('cd-s');
+    function pad(n){ return String(n).padStart(2, '0'); }
+    function tick(){
+      var diff = Math.max(0, alvo - Date.now());
+      d.textContent = pad(Math.floor(diff / 86400000));
+      h.textContent = pad(Math.floor(diff % 86400000 / 3600000));
+      m.textContent = pad(Math.floor(diff % 3600000 / 60000));
+      s.textContent = pad(Math.floor(diff % 60000 / 1000));
+    }
+    tick();
+    setInterval(tick, 1000);
+  })();
 </script>
 
 </body>
