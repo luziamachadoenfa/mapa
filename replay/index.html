@@ -101,23 +101,23 @@
     transform:translateY(0);
     pointer-events:auto;
   }
-  .btn-gold{
-    background:linear-gradient(90deg, var(--gold-light), var(--gold));
-    color:var(--navy-950);
-    padding:20px 48px;
+  .btn-green{
+    background:linear-gradient(90deg, #2C8C63, var(--navy-900));
+    color:var(--white);
+    padding:28px 64px;
     border-radius:99px;
     font-weight:700;
-    font-size:18px;
+    font-size:24px;
     text-align:center;
     text-decoration:none;
     display:inline-block;
-    box-shadow:0 10px 28px rgba(200,132,58,.35);
+    box-shadow:0 12px 32px rgba(27,61,51,.4);
   }
   @media(max-width:520px){
-    .btn-gold{
+    .btn-green{
       width:100%;
-      padding:18px 24px;
-      font-size:16px;
+      padding:24px 28px;
+      font-size:19px;
     }
   }
 </style>
@@ -142,12 +142,12 @@
     </div>
 
     <div class="cta-wrap" id="ctaWrap">
-      <a class="btn-gold" href="https://luziamachadoenfa.com.br/vacina" id="ctaBtn">Inscreva-se agora</a>
+      <a class="btn-green" href="https://luziamachadoenfa.com.br/vacina" id="ctaBtn">EU QUERO O MÉTODO VACINA</a>
     </div>
   </div>
 
   <script>
-    var CTA_DELAY_SECONDS = 20;
+    var CTA_DELAY_SECONDS = 30;
     window.addEventListener('DOMContentLoaded', function () {
       setTimeout(function () {
         document.getElementById('ctaWrap').classList.add('show');
