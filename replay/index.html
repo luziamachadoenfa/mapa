@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Replay da Live — O Mapa da Sala de Vacina Particular</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy-950:#16332B;
+    --navy-900:#1B3D33;
+    --gold:#C8843A;
+    --gold-light:#DCA866;
+    --cream:#F4EFE6;
+    --ink:#1C2433;
+    --ink-soft:#5B647A;
+    --line:#E3DDCD;
+    --white:#FFFFFF;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html,body{
+    min-height:100vh;
+    font-family:'Inter',sans-serif;
+    background:var(--cream);
+    color:var(--ink);
+    -webkit-font-smoothing:antialiased;
+  }
+  body{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    padding:40px 20px 60px;
+    min-height:100vh;
+  }
+  .serif{font-family:'Fraunces', serif;}
+
+  .logo-wrap{
+    width:100%;
+    display:flex;
+    justify-content:center;
+    margin-bottom:28px;
+  }
+  .logo-wrap img{
+    width:90px;
+    height:auto;
+    display:block;
+  }
+
+  .content{
+    width:100%;
+    max-width:860px;
+  }
+
+  h1{
+    font-family:'Fraunces', serif;
+    font-weight:500;
+    font-size:clamp(24px,3.4vw,34px);
+    text-align:center;
+    color:var(--navy-950);
+    line-height:1.25;
+    margin-bottom:8px;
+  }
+  p.sub{
+    text-align:center;
+    color:var(--ink-soft);
+    font-size:15px;
+    max-width:520px;
+    margin:0 auto 32px;
+  }
+
+  .video-frame{
+    position:relative;
+    width:100%;
+    padding-top:56.25%;
+    background:var(--navy-950);
+    border-radius:16px;
+    overflow:hidden;
+    box-shadow:0 8px 32px rgba(22,51,43,.16);
+    margin-bottom:36px;
+  }
+  .video-frame iframe{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    border:0;
+  }
+
+  .cta-wrap{
+    display:flex;
+    justify-content:center;
+    opacity:0;
+    transform:translateY(12px);
+    pointer-events:none;
+    transition:opacity .6s ease, transform .6s ease;
+  }
+  .cta-wrap.show{
+    opacity:1;
+    transform:translateY(0);
+    pointer-events:auto;
+  }
+  .btn-gold{
+    background:linear-gradient(90deg, var(--gold-light), var(--gold));
+    color:var(--navy-950);
+    padding:20px 48px;
+    border-radius:99px;
+    font-weight:700;
+    font-size:18px;
+    text-align:center;
+    text-decoration:none;
+    display:inline-block;
+    box-shadow:0 10px 28px rgba(200,132,58,.35);
+  }
+  @media(max-width:520px){
+    .btn-gold{
+      width:100%;
+      padding:18px 24px;
+      font-size:16px;
+    }
+  }
+</style>
+</head>
+<body>
+
+  <div class="logo-wrap">
+    <img src="/img/lz.jpg" alt="Luzia Machado">
+  </div>
+
+  <div class="content">
+    <h1>Assista ao replay da live</h1>
+    <p class="sub">O Mapa da Sala de Vacina Particular</p>
+
+    <div class="video-frame">
+      <iframe
+        src="https://www.youtube.com/embed/iMn44cZYGZ8"
+        title="Replay da live"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen>
+      </iframe>
+    </div>
+
+    <div class="cta-wrap" id="ctaWrap">
+      <a class="btn-gold" href="https://luziamachadoenfa.com.br/vacina" id="ctaBtn">Inscreva-se agora</a>
+    </div>
+  </div>
+
+  <script>
+    var CTA_DELAY_SECONDS = 5;
+    window.addEventListener('DOMContentLoaded', function () {
+      setTimeout(function () {
+        document.getElementById('ctaWrap').classList.add('show');
+      }, CTA_DELAY_SECONDS * 1000);
+    });
+  </script>
+
+</body>
+</html>
