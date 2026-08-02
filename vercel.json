@@ -1,6 +1,11 @@
 {
   "redirects": [
     {
+      "source": "/",
+      "destination": "/replay",
+      "permanent": false
+    },
+    {
       "source": "/vacina",
       "destination": "https://pay.hotmart.com/J106448298O",
       "permanent": false
